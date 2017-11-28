@@ -76,7 +76,7 @@ public class Producer extends ProducerConsumerBase implements Runnable, ReturnLi
             this.propertiesBuilderProcessor = new PropertiesBuilderProcessor() {
                 @Override
                 public AMQP.BasicProperties.Builder process(AMQP.BasicProperties.Builder builder) {
-                    builder.headers(Collections.<String, Object>singletonMap(TIMESTAMP_HEADER, System.nanoTime()));
+                    builder.headers(Collections.<String, Object>singletonMap(TIMESTAMP_HEADER, System.currentTimeMillis()));
                     return builder;
                 }
             };

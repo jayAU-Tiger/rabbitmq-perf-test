@@ -133,7 +133,7 @@ public class Consumer extends ProducerConsumerBase implements Runnable {
                 long msgNano = timestampExtractor.extract(properties, body);
 
 
-                long nano = System.nanoTime();
+                long nano = System.currentTimeMillis();
 
                 if (!autoAck) {
                     if (multiAckEvery == 0) {

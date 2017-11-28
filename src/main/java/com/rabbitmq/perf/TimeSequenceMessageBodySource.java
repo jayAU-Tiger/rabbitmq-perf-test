@@ -34,7 +34,7 @@ public class TimeSequenceMessageBodySource implements MessageBodySource {
     public MessageBodyAndContentType create(int sequenceNumber) throws IOException {
         ByteArrayOutputStream acc = new ByteArrayOutputStream();
         DataOutputStream d = new DataOutputStream(acc);
-        long nano = System.nanoTime();
+        long nano = System.currentTimeMillis();
         d.writeInt(sequenceNumber);
         d.writeLong(nano);
         d.flush();

@@ -130,10 +130,8 @@ public class Consumer extends ProducerConsumerBase implements Runnable {
             msgCount++;
 
             if (msgLimit == 0 || msgCount <= msgLimit) {
-                long msgNano = timestampExtractor.extract(properties, body);
-
-
-                long nano = System.currentTimeMillis();
+                long msgMillis = timestampExtractor.extract(properties, body);
+                long now = System.currentTimeMillis();
 
                 if (!autoAck) {
                     if (multiAckEvery == 0) {
@@ -147,9 +145,8 @@ public class Consumer extends ProducerConsumerBase implements Runnable {
                     channel.txCommit();
                 }
 
-                now = System.currentTimeMillis();
-
-                stats.handleRecv(id.equals(envelope.getRoutingKey()) ? (nano - msgNano) : 0L);
+                long diff = Math.abs(now - msgMillis);
+                stats.handleRecv(id.equals(envelope.getRoutingKey()) ? diff : 0L);
                 if (rateLimit > 0.0f) {
                     delay(now);
                 }

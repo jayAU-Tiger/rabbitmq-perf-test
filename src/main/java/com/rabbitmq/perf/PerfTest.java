@@ -384,18 +384,18 @@ public class PerfTest {
             if (legacyMetrics) {
                 output += (latencyCountInterval > 0 ?
                     ", min/avg/max latency: " +
-                        minLatency/1000L + "/" +
-                        cumulativeLatencyInterval / (1000L * latencyCountInterval) + "/" +
-                        maxLatency/1000L + " microseconds " :
+                        minLatency + "/" +
+                        cumulativeLatencyInterval / latencyCountInterval + "/" +
+                        maxLatency + " milliseconds " :
                     "");
             } else {
                 output += (latencyCountInterval > 0 ?
                     ", min/median/75th/95th/99th latency: "
-                        + latency.getSnapshot().getMin()/1000L + "/"
-                        + (long) latency.getSnapshot().getMedian()/1000L + "/"
-                        + (long) latency.getSnapshot().get75thPercentile()/1000L + "/"
-                        + (long) latency.getSnapshot().get95thPercentile()/1000L + "/"
-                        + (long) latency.getSnapshot().get99thPercentile()/1000L +  " microseconds" :
+                        + latency.getSnapshot().getMin() + "/"
+                        + (long)latency.getSnapshot().getMedian() + "/"
+                        + (long)latency.getSnapshot().get75thPercentile() + "/"
+                        + (long)latency.getSnapshot().get95thPercentile() + "/"
+                        + (long)latency.getSnapshot().get99thPercentile() +  " milliseconds" :
                     "");
             }
 
@@ -408,11 +408,11 @@ public class PerfTest {
                     rate(nackCountInterval, elapsedInterval, sendStatsEnabled && confirmStatsEnabled)+ "," +
                     rate(recvCountInterval, elapsedInterval, recvStatsEnabled) + "," +
                     (latencyCountInterval > 0 ?
-                        latency.getSnapshot().getMin()/1000L + "," +
-                        (long) latency.getSnapshot().getMedian()/1000L + "," +
-                        (long) latency.getSnapshot().get75thPercentile()/1000L + "," +
-                        (long) latency.getSnapshot().get95thPercentile()/1000L + "," +
-                        (long) latency.getSnapshot().get99thPercentile()/1000L
+                        latency.getSnapshot().getMin() + "," +
+                        (long)latency.getSnapshot().getMedian() + "," +
+                        (long)latency.getSnapshot().get75thPercentile() + "," +
+                        (long)latency.getSnapshot().get95thPercentile() + "," +
+                        (long)latency.getSnapshot().get99thPercentile()
                         : ",,,,")
                 );
             }
